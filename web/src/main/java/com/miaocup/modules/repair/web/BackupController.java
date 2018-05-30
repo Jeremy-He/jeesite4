@@ -60,7 +60,7 @@ public class BackupController extends BaseController {
 		String fileName = System.currentTimeMillis()+".sql";
 		try {
 			printWriter = new PrintWriter(new OutputStreamWriter(new FileOutputStream(savePath + fileName), "utf8"));
-			Process process = Runtime.getRuntime().exec(" \\usr\\local\\mysql\\bin\\mysqldump -h 120.78.221.80 -u root -p root --set-charset=UTF8 miaocup");
+			Process process = Runtime.getRuntime().exec(" \\usr\\bin\\mysqldump -h 120.78.221.80 -u root -p root --set-charset=UTF8 miaocup");
 			InputStreamReader inputStreamReader = new InputStreamReader(process.getInputStream(), "utf8");
 			bufferedReader = new BufferedReader(inputStreamReader);
 			String line;
@@ -68,6 +68,9 @@ public class BackupController extends BaseController {
 				printWriter.println(line);
 			}
 			printWriter.flush();
+			if(process.waitFor() == 0){//0 表示线程正常终止。
+				return renderResult(Global.TRUE, "数据备份失败！");
+			}
 		}catch (IOException e) {
 			e.printStackTrace();
 		} finally {
