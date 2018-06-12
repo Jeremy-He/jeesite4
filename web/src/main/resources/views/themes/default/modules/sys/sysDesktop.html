@@ -161,9 +161,11 @@
                             <ul class="list-group" id="parentIndustryUL">
 
                                 <script>
-                                    for (var i =0 ; i< ${announcementList.size()};i++) {
-
-                                        $("#parentIndustryUL").append(" <li class='list-group-item' >"+${announcementList[i].title}+"</li>");
+                                    var i =0 ;
+                                    var list = ${announcementList};
+                                    console.log(${announcementList})
+                                    for ( i=0; i< list.length;i++) {
+                                        $("#parentIndustryUL").append(" <li class='list-group-item' >"+list[0].title+"</li>");
                                     }
                                 </script>
 
