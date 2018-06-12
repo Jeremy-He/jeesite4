@@ -4,6 +4,7 @@
 package com.miaocup.modules.cm.entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.jeesite.common.mybatis.mapper.query.QueryType;
 import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.Length;
 import javax.validation.constraints.NotNull;
@@ -41,6 +42,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 		@Column(name="longitude", attrName="longitude", label="默认金额"),
 		@Column(name="latitude", attrName="latitude", label="默认金额"),
 		@Column(name="dealer", attrName="dealer", label="经销商"),
+		@Column(name="warning_limit", attrName="warningLimit", label="预警杯量" , queryType=QueryType.LTE),
 		@Column(includeEntity=DataEntity.class),
 		@Column(name="oper_status", attrName="operStatus", label="经营状态"),
 	}, joinTable={
@@ -74,7 +76,7 @@ public class CoffeeMaker extends DataEntity<CoffeeMaker> {
 	private Integer runStatus;		// 运行状态
 	private Place place;   //场地
 	private CmGrade cmGrade;  //等级
-	
+	private Integer warningLimit;
 	public CoffeeMaker() {
 		this(null);
 	}
@@ -93,7 +95,15 @@ public class CoffeeMaker extends DataEntity<CoffeeMaker> {
 	public void setCode(String code) {
 		this.code = code;
 	}
-	
+
+	public Integer getWarningLimit() {
+		return warningLimit;
+	}
+
+	public void setWarningLimit(Integer warningLimit) {
+		this.warningLimit = warningLimit;
+	}
+
 	@NotBlank(message="场地不能为空")
 	@Length(min=0, max=64, message="场地长度不能超过 64 个字符")
 	public String getPlaceId() {

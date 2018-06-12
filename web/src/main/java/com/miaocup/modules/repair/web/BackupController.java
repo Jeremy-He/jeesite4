@@ -4,20 +4,18 @@
 package com.miaocup.modules.repair.web;
 
 import com.jeesite.common.config.Global;
-import com.jeesite.common.entity.Page;
 import com.jeesite.common.web.BaseController;
-import com.miaocup.modules.repair.entity.Opinion;
-import com.miaocup.modules.repair.service.OpinionService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.io.PrintWriter;
 
 /**
  * 投诉建议Controller
@@ -60,7 +58,7 @@ public class BackupController extends BaseController {
 		String fileName = System.currentTimeMillis()+".sql";
 		try {
 			printWriter = new PrintWriter(new OutputStreamWriter(new FileOutputStream(savePath + fileName), "utf8"));
-			Process process = Runtime.getRuntime().exec(" \\usr\\bin\\mysqldump -h 120.78.221.80 -u root -p root --set-charset=UTF8 miaocup");
+			Process process = Runtime.getRuntime().exec(" \\usr\\local\\mysql\\mysqldump -h 47.106.15.12 -u root -p root --set-charset=UTF8 miaocup");
 			InputStreamReader inputStreamReader = new InputStreamReader(process.getInputStream(), "utf8");
 			bufferedReader = new BufferedReader(inputStreamReader);
 			String line;
@@ -68,9 +66,6 @@ public class BackupController extends BaseController {
 				printWriter.println(line);
 			}
 			printWriter.flush();
-			if(process.waitFor() == 0){//0 表示线程正常终止。
-				return renderResult(Global.TRUE, "数据备份失败！");
-			}
 		}catch (IOException e) {
 			e.printStackTrace();
 		} finally {

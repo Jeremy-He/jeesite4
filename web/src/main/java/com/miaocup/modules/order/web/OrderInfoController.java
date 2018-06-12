@@ -155,12 +155,15 @@ public class OrderInfoController extends BaseController {
 			data.add(order.getPayId());
 			data.add(order.getDiscountId());
 			data.add(order.getSuccessDate());
+			data.add(order.getRefundId());
+			data.add(order.getRefundDate());
+			data.add(order.getCreateDate());
 			dataSet.add(data);
 		}
 		String[] headers = new String[] {
 				"经销商", "咖啡机编号", "用户编号","订单金额",
 				"付款总额", "支付渠道", "支付流水号","优惠券编号",
-				"支付成功时间"
+				"支付成功时间","退款流水号","退款时间","交易时间"
 		};
 		ExcelUtils.export("订单信息", "订单信息", headers, dataSet, response);
 		return renderResult(Global.TRUE, "数据导出成功");

@@ -158,12 +158,16 @@
                 <div class="box-body">
                     <div class="row">
                         <div class="col-md-12">
-                            <ul class="list-group" >
-                                <li class="list-group-item">免费域名注册</li>
-                                <li class="list-group-item">免费 Window 空间托管</li>
-                                <li class="list-group-item">图像的数量</li>
-                                <li class="list-group-item">24*7 支持</li>
-                                <li class="list-group-item">每年更新成本</li>
+                            <ul class="list-group" id="parentIndustryUL">
+
+                                <script>
+                                    for (var i =0 ; i< ${announcementList.size()};i++) {
+
+                                        $("#parentIndustryUL").append(" <li class='list-group-item' >"+${announcementList[i].title}+"</li>");
+                                    }
+                                </script>
+
+
                             </ul>
                         </div> <!-- end col -->
                     </div>

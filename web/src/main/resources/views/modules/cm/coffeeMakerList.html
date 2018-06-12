@@ -106,6 +106,7 @@ $('#dataGrid').dataGrid({
 			return js.getDictLabel(${@DictUtils.getDictListJson('cm_type')}, val, '未知', true);
 		}},
 		{header:'剩余杯量', name:'cupLimit', index:'a.cup_limit', width:150, align:"center"},
+        {header:'预警杯量', name:'warningLimit', index:'a.warning_limit', width:150, align:"center"},
 		{header:'开机时间', name:'startupTime', index:'a.startup_time', width:150, align:"center"},
 		{header:'关机时间', name:'shutdownTime', index:'a.shutdown_time', width:150, align:"center"},
 		{header:'默认金额', name:'defaultPrice', index:'a.default_price', width:150, align:"right", formatter: function(val, obj, row, act){

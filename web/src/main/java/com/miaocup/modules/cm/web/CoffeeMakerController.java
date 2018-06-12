@@ -18,6 +18,8 @@ import com.miaocup.modules.coupon.service.CouponService;
 import com.miaocup.modules.order.entity.*;
 import com.miaocup.modules.order.service.ApplyRefundService;
 import com.miaocup.modules.order.service.OrderInfoService;
+import com.miaocup.modules.repair.entity.Announcement;
+import com.miaocup.modules.repair.service.AnnouncementService;
 import com.miaocup.modules.user.entity.ClientUser;
 import com.miaocup.modules.user.service.ClientUserService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
@@ -47,6 +49,8 @@ import java.util.Map;
 @RequestMapping(value = "${adminPath}/cm/coffeeMaker")
 public class CoffeeMakerController extends BaseController {
 
+	@Autowired
+	private AnnouncementService announcementService;
 	@Autowired
 	private CoffeeMakerService coffeeMakerService;
 
@@ -280,8 +284,8 @@ public class CoffeeMakerController extends BaseController {
 		model.addAttribute("xfhyNum", xfhyNum);
 		model.addAttribute("dqNum", dqNum);
 		model.addAttribute("hyNum", hyNum);
-
-
+		Announcement announcement = new Announcement();
+		model.addAttribute("announcementList",announcementService.findList(announcement));
 		List<MapResult> mapResult = coffeeMakerService.statisticsMap();
 		JSONArray json  = new JSONArray();
 		for(MapResult map : mapResult){
