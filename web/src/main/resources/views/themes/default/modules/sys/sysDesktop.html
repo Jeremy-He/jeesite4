@@ -31,7 +31,7 @@
         <div class="clearfix visible-sm-block"></div>
 
         <div class="col-md-3 col-sm-6 col-xs-12">
-            <a class="addTabPage" title="异常咖啡机" data-href="${ctx}/cm/coffeeMaker/list?operStatus=2">
+            <a class="addTabPage" title="异常咖啡机" data-href="${ctx}/cm/coffeeMaker/list?findType=2">
                 <div class="info-box">
                     <span class="info-box-icon bg-green"><i class="fa fa-bolt"></i></span>
                     <div class="info-box-content">
@@ -165,7 +165,7 @@
                                     var list = ${announcementList};
                                     console.log(${announcementList})
                                     for ( i=0; i< list.length;i++) {
-                                        $("#parentIndustryUL").append(" <li class='list-group-item' >"+list[0].title+"</li>");
+                                        $("#parentIndustryUL").append(" <li class='list-group-item' >"+list[i].title+"</li>");
                                     }
                                 </script>
 

@@ -37,6 +37,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -285,7 +286,22 @@ public class CoffeeMakerController extends BaseController {
 		model.addAttribute("dqNum", dqNum);
 		model.addAttribute("hyNum", hyNum);
 		Announcement announcement = new Announcement();
-		model.addAttribute("announcementList",announcementService.findList(announcement));
+		List<Announcement> list = new ArrayList<Announcement>();
+		List<Announcement> list2 =announcementService.findList(announcement);
+        for (int i = 0 ; i<list2.size();i++){
+            if(i==5){
+                break;
+            }
+            list.add(list2.get(i));
+        }
+        JSONArray json2 =  new JSONArray();
+        for (Announcement ann:list
+             ) {
+            JSONObject jo = new JSONObject();
+            jo.put("title", ann.getTitle());
+            json2.put(jo);
+        }
+        model.addAttribute("announcementList",json2);
 		List<MapResult> mapResult = coffeeMakerService.statisticsMap();
 		JSONArray json  = new JSONArray();
 		for(MapResult map : mapResult){

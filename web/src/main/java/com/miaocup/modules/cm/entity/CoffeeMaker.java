@@ -77,8 +77,18 @@ public class CoffeeMaker extends DataEntity<CoffeeMaker> {
 	private Place place;   //场地
 	private CmGrade cmGrade;  //等级
 	private Integer warningLimit;
+	private String findType ;
+
 	public CoffeeMaker() {
 		this(null);
+	}
+
+	public String getFindType() {
+		return findType;
+	}
+
+	public void setFindType(String findType) {
+		this.findType = findType;
 	}
 
 	public CoffeeMaker(String id){

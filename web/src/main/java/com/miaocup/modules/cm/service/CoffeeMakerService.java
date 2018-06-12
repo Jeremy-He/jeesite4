@@ -99,11 +99,19 @@ public class CoffeeMakerService extends CrudService<CoffeeMakerDao, CoffeeMaker>
 				iterator.remove();
 				continue;
 			}
+
 			String cupsCount = redisClientUtil.get(MiaocupContants.CM_CUPS_COUNT_KEY + coffeeMaker.getMachineId());
 			if (StringUtils.isNotBlank(cupsCount)) {
 				cm.setCupLimit(cm.getCupLimit() - Integer.valueOf(cupsCount));
 			}
+            if(coffeeMaker.getFindType()!=null && coffeeMaker.getFindType().equals("2")){
+                if(cm.getCupLimit()>cm.getWarningLimit()){
+                    iterator.remove();
+                    continue;
+                }
+            }
 		}
+
 		return resultPage;
 	}
 
