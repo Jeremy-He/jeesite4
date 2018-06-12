@@ -71,9 +71,13 @@
 					</div>
 				</div>
 				<div class="form-group">
-					<label class="control-label">支付成功时间：</label>
+					<label class="control-label">下单时间：</label>
 					<div class="control-inline">
-						<#form:input path="successDate" class="form-control width-120"/>
+						<#form:input path="createDate_gte" readonly="true" maxlength="20" class="form-control Wdate-datetime"
+						dataFormat="datetime" onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm',isShowClear:false,onpicked:function(){createDate_lte.click()}});"/>
+						&nbsp;--&nbsp;
+						<#form:input path="createDate_lte" readonly="true" maxlength="20" class="form-control Wdate-datetime"
+						dataFormat="datetime" onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm',isShowClear:false});"/>
 					</div>
 				</div>
 				<div class="form-group">
@@ -86,12 +90,6 @@
 					<label class="control-label">退款流水号：</label>
 					<div class="control-inline">
 						<#form:input path="refundId" maxlength="64" class="form-control width-120"/>
-					</div>
-				</div>
-				<div class="form-group">
-					<label class="control-label">退款时间：</label>
-					<div class="control-inline">
-						<#form:input path="refundDate" class="form-control width-120"/>
 					</div>
 				</div>
 				<div class="form-group">

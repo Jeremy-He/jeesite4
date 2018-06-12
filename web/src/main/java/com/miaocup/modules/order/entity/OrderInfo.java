@@ -174,20 +174,20 @@ public class OrderInfo extends DataEntity<OrderInfo> {
 		this.refundDate = refundDate;
 	}
 
-	public Date getLastTime_gte() {
+	public Date getCreateDate_gte() {
 		return sqlMap.getWhere().getValue("create_date", QueryType.GTE);
 	}
 
-	public void setLastTime_gte(Date lastTime) {
-		sqlMap.getWhere().and("create_date", QueryType.GTE, lastTime);
+	public void setCreateDate_gte(Date createDate) {
+		sqlMap.getWhere().and("create_date", QueryType.GTE, createDate);
 	}
 
-	public Date getLastTime_lte() {
+	public Date getCreateDate_lte() {
 		return sqlMap.getWhere().getValue("create_date", QueryType.LTE);
 	}
 
-	public void setLastTime_lte(Date lastTime) {
-		sqlMap.getWhere().and("create_date", QueryType.LTE, lastTime);
+	public void setCreateDate_lte(Date createDate) {
+		sqlMap.getWhere().and("create_date", QueryType.LTE, createDate);
 	}
 
 }
