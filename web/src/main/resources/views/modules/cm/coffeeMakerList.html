@@ -116,7 +116,7 @@ $('#dataGrid').dataGrid({
 			return js.getDictLabel(${@DictUtils.getDictListJson('sys_status')}, val, '未知', true);
 		}},
 		{header:'运行状态', name:'runStatus', index:'a.run_status', width:150, align:"center", formatter: function(val, obj, row, act){
-			return js.getDictLabel(${@DictUtils.getDictListJson('cm_run_status')}, val, '未知', true);
+			return js.getDictLabel(${@DictUtils.getDictListJson('cm_run_status')}, val, '未连接', true);
 		}},
 		{header:'经营状态', name:'operStatus', index:'a.oper_status', width:150, align:"center", formatter: function(val, obj, row, act){
 			return js.getDictLabel(${@DictUtils.getDictListJson('cm_oper_status')}, val, '未知', true);
