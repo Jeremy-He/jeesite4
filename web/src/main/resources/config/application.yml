@@ -1,6 +1,7 @@
 server:
 
   port: 8980
+  context-path: /miaocup
   tomcat:
     uri-encoding: UTF-8
 
