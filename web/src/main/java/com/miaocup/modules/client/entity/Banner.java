@@ -28,6 +28,7 @@ import com.jeesite.common.mybatis.mapper.query.QueryType;
 		@Column(name="start_date", attrName="startDate", label="开始时间", queryType=QueryType.LT),
 		@Column(name="end_date", attrName="endDate", label="结束时间", queryType=QueryType.GT),
 		@Column(name="image", attrName="image", label="图片"),
+		@Column(name="imageName", attrName="imageName", label="图片"),
 		@Column(name="url", attrName="url", label="链接地址"),
 		@Column(name="sort", attrName="sort", label="序号"),
 		@Column(includeEntity=DataEntity.class),
@@ -42,10 +43,19 @@ public class Banner extends DataEntity<Banner> {
 	private Date endDate;		// 结束时间
 	private String image;		// 图片
 	private String url;		// 链接地址
+	private String imageName;
 	private Integer sort;		// 序号
 	
 	public Banner() {
 		this(null);
+	}
+
+	public String getImageName() {
+		return imageName;
+	}
+
+	public void setImageName(String imageName) {
+		this.imageName = imageName;
 	}
 
 	public Banner(String id){

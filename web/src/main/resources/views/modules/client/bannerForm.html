@@ -104,8 +104,11 @@
 						<div class="form-group">
 							<label class="control-label col-sm-2">图片上传：</label>
 							<div class="col-sm-10">
-								<#form:fileupload id="uploadImage" bizKey="${banner.id}" bizType="image"
-								uploadType="image" multiple="false" class="required" readonly="false"/>
+								<#form:fileupload id="uploadImage" returnPath="true"
+								filePathInputId="image" fileNameInputId="imageName"
+								uploadType="image" readonly="false" maxUploadNum="3" isMini="false"/>
+								<#form:hidden  name="image" class="form-control" />
+								<#form:hidden  name="imageName" class="form-control"/>
 							</div>
 						</div>
 					</div>

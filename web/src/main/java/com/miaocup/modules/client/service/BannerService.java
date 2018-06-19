@@ -53,7 +53,7 @@ public class BannerService extends CrudService<BannerDao, Banner> {
 	public void save(Banner banner) {
 		super.save(banner);
 		// 保存上传图片
-		FileUploadUtils.saveFileUpload(banner.getId(), "banner_image");
+		FileUploadUtils.saveFileUpload(banner.getId(), "image");
 	}
 	
 	/**
