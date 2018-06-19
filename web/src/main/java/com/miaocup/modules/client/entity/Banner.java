@@ -28,7 +28,7 @@ import com.jeesite.common.mybatis.mapper.query.QueryType;
 		@Column(name="start_date", attrName="startDate", label="开始时间", queryType=QueryType.LT),
 		@Column(name="end_date", attrName="endDate", label="结束时间", queryType=QueryType.GT),
 		@Column(name="image", attrName="image", label="图片"),
-		@Column(name="imageName", attrName="imageName", label="图片"),
+		@Column(name="image_name", attrName="imageName", label="图片"),
 		@Column(name="url", attrName="url", label="链接地址"),
 		@Column(name="sort", attrName="sort", label="序号"),
 		@Column(includeEntity=DataEntity.class),
