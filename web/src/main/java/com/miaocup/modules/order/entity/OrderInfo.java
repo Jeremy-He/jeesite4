@@ -3,7 +3,11 @@
  */
 package com.miaocup.modules.order.entity;
 
+import com.jeesite.common.mybatis.annotation.JoinTable;
 import com.jeesite.common.utils.excel.annotation.ExcelField;
+import com.miaocup.modules.cm.entity.CmGrade;
+import com.miaocup.modules.cm.entity.Place;
+import com.miaocup.modules.user.entity.ClientUser;
 import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.Length;
 import javax.validation.constraints.NotNull;
@@ -35,7 +39,11 @@ import com.jeesite.common.mybatis.mapper.query.QueryType;
 		@Column(name="refund_id", attrName="refundId", label="退款流水号"),
 		@Column(name="refund_date", attrName="refundDate", label="退款时间"),
 		@Column(name="create_date", attrName="createDate", label="交易时间"),
-	}, orderBy="a.update_date DESC"
+	}, joinTable={
+		@JoinTable(type=JoinTable.Type.LEFT_JOIN, entity=ClientUser.class, alias="g",
+				on="g.id = a.user_id",
+				attrName="clientUser", columns={@Column(includeEntity=ClientUser.class)})
+}, orderBy="a.update_date DESC"
 )
 public class OrderInfo extends DataEntity<OrderInfo> {
 	
@@ -52,6 +60,15 @@ public class OrderInfo extends DataEntity<OrderInfo> {
 	private String refundId;		// 退款流水号
 	private Date refundDate;		// 退款时间
 	private Date createDate;
+	private ClientUser clientUser;
+
+	public ClientUser getClientUser() {
+		return clientUser;
+	}
+
+	public void setClientUser(ClientUser clientUser) {
+		this.clientUser = clientUser;
+	}
 
 	@ExcelField(title = "订单时间" , align = ExcelField.Align.LEFT,sort = 10)
 	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
