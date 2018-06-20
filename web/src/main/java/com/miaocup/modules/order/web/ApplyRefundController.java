@@ -92,6 +92,7 @@ public class ApplyRefundController extends BaseController {
 			return renderResult(Global.TRUE, "退款成功！");
 		}
 		applyRefundService.save(applyRefund);
+		applyRefundService.updateStatus(applyRefund);
 		return renderResult(Global.TRUE, "保存退款申请成功！");
 	}
 	
