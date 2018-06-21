@@ -54,12 +54,6 @@
 					</div>
 				</div>
 				<div class="form-group">
-					<label class="control-label">状态：</label>
-					<div class="control-inline width-120">
-						<#form:select path="status" dictType="client_banner_status" blankOption="true" class="form-control"/>
-					</div>
-				</div>
-				<div class="form-group">
 					<label class="control-label">备注：</label>
 					<div class="control-inline">
 						<#form:input path="remarks" maxlength="512" class="form-control width-120"/>
@@ -91,7 +85,7 @@ $('#dataGrid').dataGrid({
 		{header:'链接地址', name:'url', index:'a.url', width:150, align:"left"},
 		{header:'序号', name:'sort', index:'a.sort', width:150, align:"center"},
 		{header:'状态', name:'status', index:'a.status', width:150, align:"center", formatter: function(val, obj, row, act){
-			return js.getDictLabel(${@DictUtils.getDictListJson('client_banner_status')}, val, '未知', true);
+			return js.getDictLabel(${@DictUtils.getDictListJson('sys_search_status')}, val, '未知', true);
 		}},
 		{header:'备注', name:'remarks', index:'a.remarks', width:150, align:"left"},
 		{header:'创建时间', name:'createDate', index:'a.create_date', width:150, align:"center"},
