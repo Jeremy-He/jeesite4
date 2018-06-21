@@ -15,11 +15,15 @@ import com.miaocup.modules.cm.entity.*;
 import com.miaocup.modules.cm.service.*;
 import com.miaocup.modules.coupon.entity.Coupon;
 import com.miaocup.modules.coupon.service.CouponService;
+import com.miaocup.modules.msg.entity.OnlineMsg;
+import com.miaocup.modules.msg.service.OnlineMsgService;
 import com.miaocup.modules.order.entity.*;
 import com.miaocup.modules.order.service.ApplyRefundService;
 import com.miaocup.modules.order.service.OrderInfoService;
 import com.miaocup.modules.repair.entity.Announcement;
+import com.miaocup.modules.repair.entity.Warranty;
 import com.miaocup.modules.repair.service.AnnouncementService;
+import com.miaocup.modules.repair.service.WarrantyService;
 import com.miaocup.modules.user.entity.ClientUser;
 import com.miaocup.modules.user.service.ClientUserService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
@@ -75,6 +79,12 @@ public class CoffeeMakerController extends BaseController {
 	private ClientUserService clientUserService;
 	@Autowired
 	private CoffeeMakerykService coffeeMakerykService;
+
+	@Autowired
+	private WarrantyService warrantyService;
+
+	@Autowired
+	private OnlineMsgService onlineMsgService;
 	/**
 	 * 获取数据
 	 */
@@ -331,6 +341,11 @@ public class CoffeeMakerController extends BaseController {
 		OrderInfo info = new OrderInfo();
 		model.addAttribute("DDNum", orderInfoService.findList(info).size());
 		model.addAttribute("TKNum", applyRefundService.findList(applyRefund).size());
+		OnlineMsg msg = new OnlineMsg();
+		Warranty warranty = new Warranty();
+		warranty.setIsHandle("2");
+		model.addAttribute("BXYL", warrantyService.findList(warranty).size());
+		model.addAttribute("ZXLY", onlineMsgService.findList(msg).size());
 		return "modules/sys/sysDesktop";
 	}
 	/**
