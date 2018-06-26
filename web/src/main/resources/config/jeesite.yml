@@ -24,7 +24,8 @@ jdbc:
   # Mysql 数据库配置
   type: mysql
   driver: com.mysql.jdbc.Driver
-  url: jdbc:mysql://47.106.15.12:3306/miaocup?useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&autoReconnect=true&useSSL=false
+  url: jdbc:mysql://localhost:3306/miaocup?useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&autoReconnect=true&useSSL=false
+  #url: jdbc:mysql://47.106.15.12:3306/miaocup?useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&autoReconnect=true&useSSL=false
   username: root
   password: root
   testSql: SELECT 1
@@ -32,7 +33,7 @@ jdbc:
 #  # Oracle 数据库配置
 #  type: oracle
 #  driver: oracle.jdbc.driver.OracleDriver
-#  url: jdbc:oracle:thin:@127.0.0.1:1521/orcl
+#  url: jdbc:oracle:thin:@127.0.0.1:1521/orcl=
 #  username: jeesite
 #  password: jeesite
 #  testSql: SELECT 1 FROM DUAL
@@ -102,7 +103,8 @@ jdbc:
 redis:
 
   # Redis 连接参数
-  host: 47.106.15.12
+  host: localhost
+  #host: 47.106.15.12
   port: 6379
   isSSL: false
   timeout: 2000
@@ -223,7 +225,7 @@ redis:
 #============================#
 
 ## Shiro 相关配置
-#shiro:
+shiro:
 #
 #  #索引页路径
 #  defaultPath: ${shiro.loginUrl}
@@ -272,9 +274,10 @@ redis:
 ##  accessControlAllowOrigin: '*'
 #  
 #  # URI 权限过滤器定义
-#  filterChainDefinitions: |
-#    /ReportServer/** = user
-#    ${adminPath}/** = user
+  filterChainDefinitions: |
+    ${adminPath}/file/** = anon
+    /ReportServer/** = user
+    ${adminPath}/** = user
 #  
 ## Session 相关
 #session:
@@ -374,27 +377,27 @@ mybatis:
 #=== FileUpload settings ====#
 #============================#
 
-#file:
-#
-#  # 文件上传跟路径，设置路径中不允许包含“userfiles”，在指定目录中系统会自动创建userfiles目录，如果不设置默认为contextPath路径
-##  baseDir: D:/jeesite
-#
-#  # 上传文件的相对路径（支持：yyyy, MM, dd, HH, mm, ss, E）
-#  uploadPath: '{yyyy}{MM}/'
-#  
-#  # 上传单个文件最大字节（500M），在这之上还有 > Tomcat限制 > Nginx限制，等。
-#  maxFileSize: 500*1024*1024
-#  
-#  #设置允许上传的文件后缀
-#  imageAllowSuffixes: .gif,.bmp,.jpeg,.jpg,.ico,.png,.tif,.tiff,
-#  mediaAllowSuffixes: .flv,.swf,.mkv,webm,.mid,.mov,.mp3,.mp4,.m4v,.mpc,.mpeg,.mpg,.swf,.wav,.wma,.wmv,.avi,.rm,.rmi,.rmvb,.aiff,.asf,.ogg,.ogv,
-#  fileAllowSuffixes: .doc,.docx,.rtf,.xls,.xlsx,.csv,.ppt,.pptx,.pdf,.vsd,.txt,.md,.xml,.rar,.zip,7z,.tar,.tgz,.jar,.gz,.gzip,.bz2,.cab,.iso,.ipa,.apk,
-#  
-#  #允许上传的文件内容类型（图片、word、excel、ppt）防止修改后缀恶意上传文件（默认不启用验证）
-##  allowContentTypes: image/jpeg,image/gif,image/bmp,image/png,image/x-png,
-##    application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document,
-##    application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,
-##    application/vnd.ms-powerpoint,application/vnd.openxmlformats-officedocument.presentationml.presentation
+file:
+
+  # 文件上传跟路径，设置路径中不允许包含“userfiles”，在指定目录中系统会自动创建userfiles目录，如果不设置默认为contextPath路径
+  baseDir: /miaocup
+
+  # 上传文件的相对路径（支持：yyyy, MM, dd, HH, mm, ss, E）
+  uploadPath: '{yyyy}{MM}/'
+
+  # 上传单个文件最大字节（500M），在这之上还有 > Tomcat限制 > Nginx限制，等，此设置会覆盖 spring.http.multipart.maxFileSize 设置
+  maxFileSize: 500*1024*1024
+
+  #设置允许上传的文件后缀
+  imageAllowSuffixes: .gif,.bmp,.jpeg,.jpg,.ico,.png,.tif,.tiff,
+  mediaAllowSuffixes: .flv,.swf,.mkv,webm,.mid,.mov,.mp3,.mp4,.m4v,.mpc,.mpeg,.mpg,.swf,.wav,.wma,.wmv,.avi,.rm,.rmi,.rmvb,.aiff,.asf,.ogg,.ogv,
+  fileAllowSuffixes: .doc,.docx,.rtf,.xls,.xlsx,.csv,.ppt,.pptx,.pdf,.vsd,.txt,.md,.xml,.rar,.zip,7z,.tar,.tgz,.jar,.gz,.gzip,.bz2,.cab,.iso,.ipa,.apk,
+
+  #允许上传的文件内容类型（图片、word、excel、ppt）防止修改后缀恶意上传文件（默认不启用验证）
+#  allowContentTypes: image/jpeg,image/gif,image/bmp,image/png,image/x-png,
+#    application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document,
+#    application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,
+#    application/vnd.ms-powerpoint,application/vnd.openxmlformats-officedocument.presentationml.presentation
 
 #============================#
 #===== Message settings =====#

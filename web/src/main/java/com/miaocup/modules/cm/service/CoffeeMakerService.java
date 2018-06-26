@@ -59,7 +59,7 @@ public class CoffeeMakerService extends CrudService<CoffeeMakerDao, CoffeeMaker>
 		CoffeeMaker entity = super.get(coffeeMaker);
 		if (entity != null){
 			CoffeeMap coffee = new CoffeeMap(entity.getId());
-			coffee.setStatus(CoffeeMap.STATUS_NORMAL);
+			coffee.setCmId(entity.getMachineId());
 			entity.setCoffeeMapList(coffeeDao.findList(coffee));
 		}
 		return entity;
@@ -100,7 +100,7 @@ public class CoffeeMakerService extends CrudService<CoffeeMakerDao, CoffeeMaker>
 				continue;
 			}
 
-			String cupsCount = redisClientUtil.get(MiaocupContants.CM_CUPS_COUNT_KEY + coffeeMaker.getMachineId());
+			String cupsCount = redisClientUtil.get(MiaocupContants.CM_CUPS_COUNT_KEY + cm.getMachineId());
 			if (StringUtils.isNotBlank(cupsCount)) {
 				cm.setCupLimit(cm.getCupLimit() - Integer.valueOf(cupsCount));
 			}
