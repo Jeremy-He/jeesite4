@@ -38,7 +38,7 @@
 		count(*)
 		from t_order_info a
 		where
-		FROM_UNIXTIME(create_date,'%Y-%m-%d')=CURDATE()  and a.`status`="1";
+		to_days(create_date) = to_days(now())  and a.`status`="1";
 	</select>
 	<select id="statisticsMonth" resultType="java.lang.Integer" >
 		SELECT count(*) FROM t_order_info a WHERE date_format(a.create_date,'%Y-%m')=date_format(now(),'%Y-%m') and a.`status`="1";
