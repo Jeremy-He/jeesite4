@@ -93,12 +93,12 @@
 $('#dataGrid').dataGrid({
 	searchForm: $("#searchForm"),
 	columnModel: [
-		{header:'机器ID', name:'machineId', index:'a.machine_id', width:150, align:"left", frozen:true, formatter: function(val, obj, row, act){
+		{header:'机器ID', name:'machineId', index:'a.machine_id', width:170, align:"center", frozen:true, formatter: function(val, obj, row, act){
 			return '<a href="${ctx}/cm/coffeeMaker/form?id='+row.id+'&code='+row.code+'" class="btnList" data-title="编辑咖啡机">'+(val||row.id)+'</a>';
 		}},
 
-		{header:'机器编码', name:'code', index:'a.code', width:150, align:"left"},
-        {header:'操作', name:'actions', width:150, sortable:false, title:false, formatter: function(val, obj, row, act){
+		{header:'机器编码', name:'code', index:'a.code', width:170, align:"center"},
+        {header:'操作', name:'actions', width:200, sortable:false, align:"right", title:false, formatter: function(val, obj, row, act){
                 var actions = [];
             <% if(hasPermi('cm:coffeeMaker:edit')){ %>
                     actions.push('<a href="${ctx}/cm/coffeeMaker/form?id='+row.id+'&code='+row.code+'" class="btnList" title="编辑咖啡机"><i class="fa fa-pencil"></i></a>&nbsp;');
@@ -120,7 +120,7 @@ $('#dataGrid').dataGrid({
                     actions.push('<a href="${ctx}/cm/coffeeMaker/command?machineId='+row.machineId+'&machineCode='+row.code+'&command=AA38" class="btn btn-default btn-xs btnList" data-confirm="确认要执行吗？" title="机器除垢设置"><i class="fa fa-ambulance"></i></a>&nbsp;');
                     actions.push('<a href="${ctx}/cm/coffeeMaker/command?machineId='+row.machineId+'&machineCode='+row.code+'&command=AA39" class="btn btn-default btn-xs btnList" data-confirm="确认要执行吗？" title="水硬度设置"><i class="fa fa-tint"></i></a>&nbsp;');
                     actions.push('<a href="${ctx}/cm/coffeeMaker/command?machineId='+row.machineId+'&machineCode='+row.code+'&command=AA3A" class="btn btn-default btn-xs btnList" data-confirm="确认要执行吗？" title="定时关机设置"><i class="fa fa-clock-o"></i></a>&nbsp;');
-                    actions.push('<a href="${ctx}/cm/coffeeMaker/command?machineId='+row.machineId+'&machineCode='+row.code+'&command=AA3B" class="btn btn-default btn-xs btnList" data-confirm="确认要执行吗？" title="温度设置"><i class="fa fa-flask"></i></a>&nbsp;');
+                    actions.push('<a href="${ctx}/cm/coffeeMaker/command?machineId='+row.machineId+'&machineCode='+row.code+'&command=AA3B" class="btn btn-default btn-xs btnList" data-confirm="确认要执行吗？" title="温度设置"><i class="fa fa-tumblr-square" aria-hidden="true"></i></a>&nbsp;');
                     actions.push('</div>');
                 <% } %>
                 return actions.join('');
@@ -129,9 +129,7 @@ $('#dataGrid').dataGrid({
         {header:'城市编码', name:'place.code', index:'a.place_id', width:150, align:"center"},
 		{header:'场地名称', name:'place.address', index:'a.place_id', width:150, align:"center"},
 		{header:'等级', name:'cmGrade.name', index:'a.grade', width:150, align:"center"},
-		{header:'类别', name:'type', index:'a.type', width:150, align:"center", formatter: function(val, obj, row, act){
-			return js.getDictLabel(${@DictUtils.getDictListJson('cm_type')}, val, '未知', true);
-		}},
+
 		{header:'剩余杯量', name:'cupLimit', index:'a.cup_limit', width:150, align:"center"},
         {header:'预警杯量', name:'warningLimit', index:'a.warning_limit', width:150, align:"center"},
 		{header:'默认金额', name:'defaultPrice', index:'a.default_price', width:150, align:"right", formatter: function(val, obj, row, act){
