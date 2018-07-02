@@ -39,6 +39,7 @@ import com.jeesite.common.mybatis.mapper.query.QueryType;
 		@Column(name="refund_id", attrName="refundId", label="退款流水号"),
 		@Column(name="refund_date", attrName="refundDate", label="退款时间"),
 		@Column(name="create_date", attrName="createDate", label="交易时间"),
+		@Column(name="order_status", attrName="orderStatus", label="交易时间"),
 	}, joinTable={
 		@JoinTable(type=JoinTable.Type.LEFT_JOIN, entity=ClientUser.class, alias="g",
 				on="g.id = a.user_id",
@@ -59,6 +60,7 @@ public class OrderInfo extends DataEntity<OrderInfo> {
 	private Date successDate;		// 支付成功时间
 	private String refundId;		// 退款流水号
 	private Date refundDate;		// 退款时间
+	private Integer orderStatus;    // 订单时间
 	private Date createDate;
 	private ClientUser clientUser;
 
@@ -207,4 +209,11 @@ public class OrderInfo extends DataEntity<OrderInfo> {
 		sqlMap.getWhere().and("create_date", QueryType.LTE, createDate);
 	}
 
+	public Integer getOrderStatus() {
+		return orderStatus;
+	}
+
+	public void setOrderStatus(Integer orderStatus) {
+		this.orderStatus = orderStatus;
+	}
 }

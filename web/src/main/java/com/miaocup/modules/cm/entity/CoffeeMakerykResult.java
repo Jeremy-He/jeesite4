@@ -3,7 +3,6 @@
  */
 package com.miaocup.modules.cm.entity;
 
-import com.jeesite.common.entity.DataEntity;
 import lombok.Data;
 
 import java.util.Date;

@@ -3,8 +3,9 @@
  */
 package com.jeesite.modules.config.web;
 
-import javax.servlet.Filter;
-
+import com.jeesite.common.config.Global;
+import com.jeesite.common.shiro.web.ShiroFilterFactoryBean;
+import com.jeesite.common.web.PageCachingFilter;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
@@ -13,10 +14,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
 import org.springframework.web.filter.CharacterEncodingFilter;
-
-import com.jeesite.common.config.Global;
-import com.jeesite.common.shiro.web.ShiroFilterFactoryBean;
-import com.jeesite.common.web.PageCachingFilter;
 
 /**
  * Filter 配置
@@ -65,7 +62,7 @@ public class FilterConfig {
 	@Order(3000)
 	public FilterRegistrationBean shiroFilterProxy(ShiroFilterFactoryBean shiroFilter) throws Exception {
 		FilterRegistrationBean bean = new FilterRegistrationBean();
-		bean.setFilter((Filter) shiroFilter.getInstance());
+		bean.setFilter(shiroFilter.getInstance());
 		bean.addUrlPatterns("/*");
 		return bean;
 	}
