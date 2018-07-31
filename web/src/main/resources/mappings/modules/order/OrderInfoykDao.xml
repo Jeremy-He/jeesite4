@@ -4,7 +4,7 @@
 	<sql id="OrderInfoResultColumns">
 		COUNT(*) AS "count" ,
 		DATE_FORMAT(a.create_date,'%Y-%m-%d')  as "time",
-		a.status AS "status"
+		a.order_status AS "status"
 	</sql>
 	<select id="statisticsData" resultType="com.miaocup.modules.order.entity.OrderInfoResult">
 		select
@@ -29,7 +29,7 @@
 			<if test="(lastStatisticsTime_gte == null ) and (lastStatisticsTime_lte != null )">
 				AND DATE_FORMAT(a.create_date,'%Y-%m-%d') &lt;= DATE_FORMAT(#{lastStatisticsTime_lte,jdbcType=TIMESTAMP},'%Y-%m-%d')
 			</if>
-		GROUP BY DATE_FORMAT(a.create_date,'%Y-%m-%d') , a.status
+		GROUP BY DATE_FORMAT(a.create_date,'%Y-%m-%d') , a.order_status
 		ORDER BY DATE_FORMAT(a.create_date,'%Y-%m-%d');
 	</select>
 
@@ -41,7 +41,7 @@
 		to_days(create_date) = to_days(now())  and a.order_status="1";
 	</select>
 	<select id="statisticsMonth" resultType="java.lang.Integer" >
-		SELECT count(*) FROM t_order_info a WHERE date_format(a.create_date,'%Y-%m')=date_format(now(),'%Y-%m') and a.`status`="1";
+		SELECT count(*) FROM t_order_info a WHERE date_format(a.create_date,'%Y-%m')=date_format(now(),'%Y-%m') and a.`order_status`="1";
 	</select>
 	<select id="statisticsMap"  resultType="com.miaocup.modules.order.entity.MapResult">
 		select c.`name` as "name", count(*) as "count" from t_coffee c

@@ -12,7 +12,7 @@
 	</select> -->
 	<select id="findList"  resultType="com.miaocup.modules.cm.entity.CoffeeMakerResult">
 		select o.cm_id as "cmId",c.`code` as "code",p.dealer as "dealer", p.address as "address", count(*) as "count" ,sum(o.payment_amount) as "sum" from t_order_info o , t_coffee_maker c ,t_place p
-		where o.cm_id = c.id  and p.id = c.place_id  and o.`status`='1'
+		where o.cm_id = c.id  and p.id = c.place_id  and o.`order_status`='1'
 		<if test="lastStatisticsTime_gte != null and lastStatisticsTime_lte != null ">
 			AND DATE_FORMAT(o.create_date,'%Y-%m-%d') BETWEEN DATE_FORMAT(#{lastStatisticsTime_gte,jdbcType=TIMESTAMP},'%Y-%m-%d') AND DATE_FORMAT(#{lastStatisticsTime_lte,jdbcType=TIMESTAMP},'%Y-%m-%d')
 		</if>

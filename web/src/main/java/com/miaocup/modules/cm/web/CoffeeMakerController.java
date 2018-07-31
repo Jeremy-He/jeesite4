@@ -41,6 +41,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -245,10 +246,10 @@ public class CoffeeMakerController extends BaseController {
 		CoffeeMaker coffeeMaker = new CoffeeMaker();
 		List<CoffeeMaker> coffeeMakerList = coffeeMakerService.findList(coffeeMaker);
 		OrderInfo order = new OrderInfo();
-		order.setStatus("1");
+		order.setOrderStatus(1);
 		List<OrderInfo> orderInfoList = orderInfoService.findList(order);
 		OrderInfo order2 = new OrderInfo();
-		order2.setStatus("5");
+		order2.setOrderStatus(4);
 		List<OrderInfo> orderInfoList2 = orderInfoService.findList(order2);
 		Double TKJENum=0.0 ;
 		String TKNum = orderInfoList2.size()+"";
@@ -260,9 +261,11 @@ public class CoffeeMakerController extends BaseController {
 		for (OrderInfo orderInfo: orderInfoList2) {
 			TKJENum += orderInfo.getPaymentAmount();
 		}
+		BigDecimal bg = new BigDecimal(LYNum);
+		double f1 = bg.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
 		model.addAttribute("TKJENum", TKJENum);
 		model.addAttribute("TKNum", TKNum);
-		model.addAttribute("LYNum", LYNum);
+		model.addAttribute("LYNum", f1);
 		model.addAttribute("ckNum", ckNum);
 		model.addAttribute("orderInfoCondition", orderInfoCondition);
 		model.addAttribute("coffeeMakerList", coffeeMakerList);
@@ -326,7 +329,7 @@ public class CoffeeMakerController extends BaseController {
 		int zfb = 0;
 		int yl = 0;
 		OrderInfo orderInfo = new OrderInfo();
-		orderInfo.setStatus("1");
+		orderInfo.setOrderStatus(1);
 		orderInfo.setPayChannel(0);
 		wx = orderInfoService.findList(orderInfo).size();
 		orderInfo.setPayChannel(1);
@@ -381,9 +384,9 @@ public class CoffeeMakerController extends BaseController {
 			order.setCmId(orderInfoCondition.getCoffeeMakerId());
 			order2.setCmId(orderInfoCondition.getCoffeeMakerId());
 		}
-		order.setStatus("1");
+		order.setOrderStatus(1);
 		List<OrderInfo> orderInfoList = orderInfoService.findList(order);
-		order2.setStatus("5");
+		order2.setOrderStatus(4);
 		List<OrderInfo> orderInfoList2 = orderInfoService.findList(order2);
 		Double TKJENum=0.0 ;
 		String TKNum = orderInfoList2.size()+"";
