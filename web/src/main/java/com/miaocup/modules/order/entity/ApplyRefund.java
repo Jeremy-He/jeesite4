@@ -3,6 +3,8 @@
  */
 package com.miaocup.modules.order.entity;
 
+import com.jeesite.common.mybatis.annotation.JoinTable;
+import com.miaocup.modules.user.entity.ClientUser;
 import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.Length;
 
@@ -23,7 +25,11 @@ import com.jeesite.common.mybatis.mapper.query.QueryType;
 		@Column(name="reason", attrName="reason", label="退款原因"),
 		@Column(name="images", attrName="images", label="图片"),
 		@Column(includeEntity=DataEntity.class),
-	}, orderBy="a.update_date DESC"
+	}, joinTable={
+		@JoinTable(type=JoinTable.Type.LEFT_JOIN, entity=ClientUser.class, alias="g",
+				on="g.id = a.user_id",
+				attrName="clientUser", columns={@Column(includeEntity=ClientUser.class)})
+}, orderBy="a.update_date DESC"
 )
 public class ApplyRefund extends DataEntity<ApplyRefund> {
 	
@@ -32,7 +38,16 @@ public class ApplyRefund extends DataEntity<ApplyRefund> {
 	private String orderId;		// 订单ID
 	private String reason;		// 退款原因
 	private String images;		// 图片
-	
+	private ClientUser clientUser;
+
+	public ClientUser getClientUser() {
+		return clientUser;
+	}
+
+	public void setClientUser(ClientUser clientUser) {
+		this.clientUser = clientUser;
+	}
+
 	public ApplyRefund() {
 		this(null);
 	}

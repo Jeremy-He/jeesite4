@@ -276,7 +276,7 @@ public class CoffeeMakerController extends BaseController {
 	@RequestMapping(value = "shouye")
 	public String shouye(OrderInfoCondition orderInfoCondition, Model model) {
 		OrderInfo order = new OrderInfo();
-		order.setStatus("1");
+		order.setOrderStatus(1);
 		List<OrderInfo> orderInfoList = orderInfoService.findList(order);
 		String ckNum = orderInfoList.size()+"";
 		String JRckNum = coffeeMakerService.statisticsDay()+"";

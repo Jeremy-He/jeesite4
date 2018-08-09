@@ -47,7 +47,7 @@
 		select c.`name` as "name", count(*) as "count" from t_coffee c
 		JOIN t_coffee_map m on m.coffee_id = c.id
 		JOIN t_order_details o on o.coffee_id = m.id
-		JOIN t_order_info i on i.id = o.order_id and i.`status` = '1'
+		JOIN t_order_info i on i.id = o.order_id and i.`order_status` = '1'
 		GROUP BY c.`name`
 	</select>
 </mapper>
